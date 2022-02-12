@@ -1,0 +1,10 @@
+queen
+king
+accept
+car
+act
+actor
+actress
+add
+adult
+success 
