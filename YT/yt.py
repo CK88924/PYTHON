@@ -6,6 +6,7 @@ Created on Tue Jul  5 01:12:45 2022
 """
 from pytube import Playlist, YouTube
 import urllib.request as url_req
+import  os
 
 def Down_YT():
     yt_input = input('請輸入影片網址:\n')
@@ -39,11 +40,12 @@ def Down_List():
         for video in range(len(pl)): 
             yt = YouTube(pl[video])
             if ask == 'm':
-                
                 mp3 = yt.streams.filter(only_audio=True).first()
-                mp3.download('mp3')
+                mp3 = mp3.download(output_path='mp3')
+                base, ext = os.path.splitext(mp3)
+                new_file = base + '.mp3'
+                os.rename(mp3, new_file)
                 
-               
             elif ask =='v':
                 progMP4 = yt.streams.filter(progressive=True, file_extension='mp4')# 篩選 progressive 類型的 MP4 影片格式
                 targetMP4 = progMP4.order_by('resolution').desc().first()# 找出解析度最好的 MP4 影片
@@ -51,7 +53,11 @@ def Down_List():
                 
             elif ask =='a':
                 mp3 = yt.streams.filter(only_audio=True).first()
-                mp3.download('mp3')
+                mp3 = mp3.download(output_path='mp3')
+                base, ext = os.path.splitext(mp3)
+                new_file = base + '.mp3'
+                os.rename(mp3, new_file)
+                
                 progMP4 = yt.streams.filter(progressive=True, file_extension='mp4')# 篩選 progressive 類型的 MP4 影片格式
                 targetMP4 = progMP4.order_by('resolution').desc().first()# 找出解析度最好的 MP4 影片
                 video_file= targetMP4.download('videos')
