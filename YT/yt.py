@@ -13,21 +13,50 @@ def Down_YT():
         yt = YouTube(yt_input)
         progMP4 = yt.streams.filter(progressive=True, file_extension='mp4')# 篩選 progressive 類型的 MP4 影片格式
         targetMP4 = progMP4.order_by('resolution').desc().first()# 找出解析度最好的 MP4 影片
-        video_file = targetMP4.download('video')
-        print('影片下載完成')
+        ask = input('是否下載 mp3 m:mp3/ v:mp4/a:all:')
+        if ask == 'm':
+            mp3 = yt.streams.filter().get_audio_only().download(filename= 'mp3\\'+ yt.title + '.mp3')
+            print('mp3下載完成')
+        elif ask == 'v':
+             video_file = targetMP4.download('video')
+             print('影片下載完成')
+        elif ask == 'a':
+              mp3 = yt.streams.filter().get_audio_only().download(filename= 'mp3\\'+ yt.title + '.mp3')
+              video_file = targetMP4.download('video')
+              print('影片及mp3下載完成')
+        
+       
     except:
         pass
 
 def Down_List():
     list_input = input('請輸入播放清單ex:https://www.youtube.com/playlist?list=\n')
+    
+    
     try:
+        ask = input('清單下載模式 mp3 m:mp3/ v:mp4/a:all:')
         pl = Playlist(list_input)
-        for video in range(len(pl)):
+        for video in range(len(pl)): 
             yt = YouTube(pl[video])
-            progMP4 = yt.streams.filter(progressive=True, file_extension='mp4')# 篩選 progressive 類型的 MP4 影片格式
-            targetMP4 = progMP4.order_by('resolution').desc().first()# 找出解析度最好的 MP4 影片
-            video_file = targetMP4.download('videos')
-        print('播放清單下載完畢')
+            if ask == 'm':
+                
+                mp3 = yt.streams.filter(only_audio=True).first()
+                mp3.download('mp3')
+                
+               
+            elif ask =='v':
+                progMP4 = yt.streams.filter(progressive=True, file_extension='mp4')# 篩選 progressive 類型的 MP4 影片格式
+                targetMP4 = progMP4.order_by('resolution').desc().first()# 找出解析度最好的 MP4 影片
+                targetMP4.download('videos')
+                
+            elif ask =='a':
+                mp3 = yt.streams.filter(only_audio=True).first()
+                mp3.download('mp3')
+                progMP4 = yt.streams.filter(progressive=True, file_extension='mp4')# 篩選 progressive 類型的 MP4 影片格式
+                targetMP4 = progMP4.order_by('resolution').desc().first()# 找出解析度最好的 MP4 影片
+                video_file= targetMP4.download('videos')
+        print('播放清單下載完成')
+          
     except:
         pass
     

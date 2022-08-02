@@ -1,1 +1,2 @@
-請適時更新pytube套件:pip install --upgrade pytube
+1.請適時更新pytube套件:pip install --upgrade pytub11e1
+2.新增3種模式: m:只下載音訊(預設.mp4) /v:只下載影片 / a:全模式
