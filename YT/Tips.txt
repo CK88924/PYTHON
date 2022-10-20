@@ -1,6 +1,7 @@
 1.請適時更新pytube套件:pip install --upgrade pytube
-2.新增3種模式: m:只下載音訊(預設.mp4) /v:只下載影片 / a:全模式
-3. import os to convert mp4 to mp3
-4.檔案下載可能因osError(Error 22)而無效進而跳過(無效檔名) 目前示範以temp.mp3代替
+2.提醒:請記得新增 image/mp3/video/videos ...資料夾
+3.新增3種模式: m:只下載音訊(預設.mp4) /v:只下載影片 / a:全模式
+4. import os to convert mp4 to mp3
+5.檔案下載可能因osError(Error 22)而無效進而跳過(無效檔名) 目前示範以temp.mp3代替
 ================================================================================
 適用於非Youtube官方限制影音素材下
