@@ -8,6 +8,7 @@ from pytube import Playlist, YouTube
 import urllib.request as url_req
 import  os
 
+
 def Down_YT():
     yt_input = input('請輸入影片網址:\n')
     try:
@@ -16,8 +17,17 @@ def Down_YT():
         targetMP4 = progMP4.order_by('resolution').desc().first()# 找出解析度最好的 MP4 影片
         ask = input('是否下載 mp3 m:mp3/ v:mp4/a:all:')
         if ask == 'm':
-            mp3 = yt.streams.filter().get_audio_only().download(filename= 'mp3\\'+ yt.title + '.mp3')
-            print('mp3下載完成')
+            try:
+                mp3 = yt.streams.filter().get_audio_only().download(filename= 'mp3\\'+ yt.title + '.mp3')
+                print('mp3下載完成')
+            except OSError:
+                  mp3 = yt.streams.filter().get_audio_only().download(filename= 'mp3\\temp.mp3')
+                  print("temp download ok")
+            finally:
+                pass
+            
+           
+           
         elif ask == 'v':
              video_file = targetMP4.download('video')
              print('影片下載完成')
